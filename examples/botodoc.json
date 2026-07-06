@@ -1,0 +1,40 @@
+{
+  "processo": "Criar Parcela de Anuidade",
+  "componente_padrao": {
+    "type": "spring-boot",
+    "name": "cartoesespecificos-api",
+    "description": "API de Cartões Específicos"
+  },
+  "steps": [
+    {"passo_vertical": 1, "nome": "Consumir Solicitação"},
+    {"passo_vertical": 2, "nome": "Obter Configuração"},
+    {
+      "passo_vertical": 3,
+      "nome": "Validar Tipo de Cliente",
+      "condicional": {
+        "variavel": "tipoPessoa",
+        "ramos": [
+          {
+            "condicao": "PF",
+            "label": "Pessoa Física",
+            "steps": [
+              {"passo_vertical": 1, "nome": "Buscar Dados PF"},
+              {"passo_vertical": 2, "nome": "Validar CPF"}
+            ]
+          },
+          {
+            "condicao": "PJ",
+            "label": "Pessoa Jurídica",
+            "steps": [
+              {"passo_vertical": 1, "nome": "Buscar Dados PJ"},
+              {"passo_vertical": 2, "nome": "Validar CNPJ"},
+              {"passo_vertical": 3, "nome": "Verificar Inscrição Estadual"}
+            ]
+          }
+        ]
+      }
+    },
+    {"passo_vertical": 4, "nome": "Gerar Parcela"},
+    {"passo_vertical": 5, "nome": "Publicar Evento"}
+  ]
+}
